@@ -1,0 +1,34 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  color: #1a202c;
+}
+.app { max-width: 1100px; margin: 0 auto; padding: 20px; }
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 24px; background: white; border-radius: 12px;
+  margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+nav .brand { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: #667eea; }
+nav a { color: #4a5568; text-decoration: none; margin-right: 16px; }
+nav button { background: #667eea; color: white; border: 0; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: .9rem; }
+main { display: flex; justify-content: center; }
+.card { background: white; border-radius: 12px; padding: 32px; width: 100%; max-width: 500px; box-shadow: 0 10px 40px rgba(0,0,0,.15); }
+.card.wide { max-width: 900px; }
+h1 { margin-bottom: 20px; color: #2d3748; }
+input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; margin-bottom: 12px; }
+input:focus { outline: 0; border-color: #667eea; }
+button[type=submit] { width: 100%; padding: 12px; background: #667eea; color: white; border: 0; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+button[type=submit]:disabled { opacity: .5; cursor: not-allowed; }
+.error { color: #e53e3e; margin-top: 8px; font-size: .9rem; }
+.hint { text-align: center; margin-top: 16px; color: #718096; }
+.hint .link { background: 0; border: 0; color: #667eea; cursor: pointer; text-decoration: underline; }
+.result { margin-top: 20px; padding: 16px; background: #f7fafc; border-radius: 8px; border-left: 4px solid #48bb78; }
+.result a { color: #38a169; font-weight: 600; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #f7fafc; font-weight: 600; }
+.truncate { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+a { color: #667eea; }
