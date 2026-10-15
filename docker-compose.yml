@@ -1,0 +1,63 @@
+services:
+  backend:
+    build: ./backend
+    image: linkly-backend:local
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file: ./backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [appnet]
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:3000/api
+        VITE_BASE_URL: http://localhost:3000
+    image: linkly-frontend:local
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on: [backend]
+    restart: unless-stopped
+    networks: [appnet]
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: linkly
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: linkly
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U linkly"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks: [appnet]
+
+  cache:
+    image: redis:7-alpine
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks: [appnet]
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  appnet:
+    driver: bridge
